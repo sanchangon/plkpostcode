@@ -16,3 +16,8 @@ http://203.157.213.56/plkpostcode/
 * Marker icons included in grouped layer control via the [grouped layer control plugin](https://github.com/ismyrnow/Leaflet.groupedlayercontrol)
 
 ### Screenshots:
+![Desktop](http://i.imgur.com/DWc4naj.png)
+
+![Desktop Popup](http://i.imgur.com/7tfZGSt.png)
+
+![Desktop Table](http://i.imgur.com/9kcPfQa.png)
