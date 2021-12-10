@@ -109,12 +109,22 @@ function syncSidebar() {
 }
 
 /* Basemap Layers */
-var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-//var imageryRoad = "Road"; //Aerial AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
-var bingRoad = new L.BingLayer("LfO3DMI9S6GnXD7d0WGs~bq2DRVkmIAzSOFdodzZLvw~Arx8dclDxmZA0Y38tHIJlJfnMbGq5GXeYmrGOUIbS2VLFzRKCK0Yv_bAl6oe-DOc", {type: "Road"});
-//var imagerySet = "AerialWithLabels"; //Aerial AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
-var bingSat = new L.BingLayer("LfO3DMI9S6GnXD7d0WGs~bq2DRVkmIAzSOFdodzZLvw~Arx8dclDxmZA0Y38tHIJlJfnMbGq5GXeYmrGOUIbS2VLFzRKCK0Yv_bAl6oe-DOc", {type: "AerialWithLabels"});
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 22,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
 
+var ghyb = L.tileLayer('https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}', {
+  maxZoom: 22,
+  subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  attribution: '&copy; <a href="https://www.google.co.th/maps">Google</a>'
+});
+
+var gmap = L.tileLayer('https://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+  maxZoom: 22,
+  subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  attribution: '&copy; <a href="https://www.google.co.th/maps">Google</a>'
+});
 
 /* Overlay Layers */
 var highlight = L.geoJson(null);
@@ -396,7 +406,7 @@ $.getJSON("data/postcode.geojson", function (data) {
 map = L.map("map", {
   zoom: 10,
   center: [100.262739, 16.823729], //plk 16.823729, 100.262739
-  layers: [bingRoad, boroughs, markerClusters, highlight],
+  layers: [ghyb, boroughs, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
 });
@@ -500,9 +510,8 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-    //"OpenStreetMap": osm,
-    "Aerial": bingSat,
-    "Streets": bingRoad,
+    "Google Maps": gmap,
+    "Google Hybrid": ghyb,
     "OpenStreetMap": osm
 };
 
